@@ -1,0 +1,93 @@
+# .swiftlint.yml
+# PEWS - Predictive Early Warning System
+# SwiftLint Configuration
+
+disabled_rules:
+  - trailing_whitespace
+
+opt_in_rules:
+  - empty_count
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - closure_spacing
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - discouraged_optional_boolean
+  - empty_collection_literal
+  - empty_string
+  - first_where
+  - flatmap_over_map_reduce
+  - last_where
+  - modifier_order
+  - overridden_super_call
+  - pattern_matching_keywords
+  - prefer_self_in_static_references
+  - private_action
+  - redundant_nil_coalescing
+  - sorted_first_last
+  - toggle_bool
+  - unneeded_parentheses_in_closure_argument
+  - vertical_parameter_alignment_on_call
+
+line_length:
+  warning: 120
+  error: 150
+
+file_length:
+  warning: 400
+  error: 500
+
+function_body_length:
+  warning: 25
+  error: 40
+
+type_body_length:
+  warning: 300
+  error: 400
+
+function_parameter_count:
+  warning: 5
+  error: 8
+
+nesting:
+  type_level: 2
+  function_level: 3
+
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 50
+    error: 60
+  excluded:
+    - id
+    - x
+    - y
+    - i
+    - w
+    - f
+    - a
+
+excluded:
+  - Pods
+  - DerivedData
+  - .build
+  - Tests/Mocks
+
+custom_rules:
+  no_print:
+    name: "No Print Statements"
+    regex: "\\bprint\\s*\\("
+    message: "Use Logger instead of print()"
+    severity: warning
+
+  no_force_cast:
+    name: "No Force Cast"
+    regex: "\\bas!\\s"
+    message: "Avoid force casting. Use conditional casting (as?) instead."
+    severity: warning
+
+reporter: "xcode"
