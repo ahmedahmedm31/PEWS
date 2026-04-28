@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-iOS%2016%2B-blue" alt="Platform">
+  <img src="https://img.shields.io/badge/Platform-iOS%2017%2B-blue" alt="Platform">
   <img src="https://img.shields.io/badge/Swift-5.9-orange" alt="Swift">
-  <img src="https://img.shields.io/badge/SwiftUI-4.0-green" alt="SwiftUI">
+  <img src="https://img.shields.io/badge/SwiftUI-5.0-green" alt="SwiftUI">
   <img src="https://img.shields.io/badge/Architecture-Clean%20%2B%20MVVM-purple" alt="Architecture">
   <img src="https://img.shields.io/badge/License-MIT-lightgrey" alt="License">
 </p>
@@ -76,51 +76,61 @@ PEWS follows **Clean Architecture** combined with **MVVM** (Model-View-ViewModel
 
 ```
 PEWS/
-├── App/
-│   ├── PEWSApp.swift                    # App entry point
-│   ├── AppDelegate.swift                # App lifecycle
-│   ├── DependencyContainer.swift        # DI container
-│   └── Configuration/
-│       ├── AppConfig.swift              # App configuration
-│       └── APIKeys.swift                # API key management
-├── Core/
-│   ├── Extensions/                      # Date, Color, View, Double extensions
-│   ├── Protocols/                       # Repository, UseCase, Mockable protocols
-│   └── Utilities/                       # Logger, Constants, Formatters, etc.
-├── Data/
-│   ├── DTOs/
-│   │   ├── Request/                     # API request DTOs
-│   │   ├── Response/                    # API response DTOs
-│   │   └── Mappers/                     # DTO-to-Entity mappers
-│   ├── DataSources/
-│   │   ├── Remote/                      # NetworkClient, API services
-│   │   └── Local/                       # CoreData, UserDefaults, Cache
-│   └── Repositories/                    # Repository implementations
-├── Domain/
-│   ├── Entities/                        # WeatherData, Forecast, Alert, etc.
-│   ├── Interfaces/                      # Repository protocols
-│   └── UseCases/                        # Business logic use cases
-├── ML/
-│   ├── PredictionEngine.swift           # CoreML integration
-│   ├── FeatureExtractor.swift           # Feature normalization
-│   ├── ModelTrainer.swift               # On-device model updates
-│   └── ModelValidator.swift             # Prediction accuracy tracking
-├── Presentation/
-│   ├── MainTabView.swift                # Root tab navigation
-│   ├── Dashboard/                       # Dashboard screen
-│   ├── History/                         # History & charts screen
-│   ├── Alerts/                          # Alerts management screen
-│   ├── Settings/                        # Settings screen
-│   ├── Location/                        # Location search
-│   ├── Onboarding/                      # First-launch onboarding
-│   └── Shared/                          # Shared components & styles
-├── Tests/
-│   ├── Mocks/                           # Mock implementations
-│   └── UnitTests/                       # Unit test suites
-├── .swiftlint.yml                       # SwiftLint configuration
-├── .gitignore                           # Git ignore rules
-├── CHANGELOG.md                         # Version history
-└── README.md                            # This file
+├── Package.swift                            # Swift Package Manager manifest
+├── Configuration/
+│   ├── Debug.xcconfig.example               # Debug build config template
+│   └── Release.xcconfig.example             # Release build config template
+├── Sources/
+│   ├── PEWS/
+│   │   ├── App/
+│   │   │   ├── PEWSApp.swift                # App entry point + MainTabView
+│   │   │   ├── AppDelegate.swift            # App lifecycle
+│   │   │   ├── DependencyContainer.swift    # DI container
+│   │   │   └── Configuration/
+│   │   │       ├── AppConfig.swift          # App configuration
+│   │   │       ├── APIKeys.swift            # API key management (gitignored)
+│   │   │       └── APIKeys.example.swift    # API key template
+│   │   ├── Core/
+│   │   │   ├── Extensions/                  # Date, Color, View, Double extensions
+│   │   │   ├── Protocols/                   # Repository, UseCase, Mockable protocols
+│   │   │   └── Utilities/                   # Logger, Constants, Formatters, etc.
+│   │   ├── Data/
+│   │   │   ├── DTOs/
+│   │   │   │   ├── Request/                 # API request DTOs
+│   │   │   │   ├── Response/                # API response DTOs
+│   │   │   │   └── Mappers/                 # DTO-to-Entity mappers
+│   │   │   ├── DataSources/
+│   │   │   │   ├── Remote/                  # NetworkClient, API services
+│   │   │   │   └── Local/                   # CoreData, UserDefaults, Cache
+│   │   │   └── Repositories/                # Repository implementations
+│   │   ├── Domain/
+│   │   │   ├── Entities/                    # WeatherData, Forecast, Alert, etc.
+│   │   │   ├── Interfaces/                  # Repository protocols
+│   │   │   └── UseCases/                    # Business logic use cases
+│   │   ├── ML/
+│   │   │   ├── PredictionEngine.swift       # CoreML integration
+│   │   │   ├── FeatureExtractor.swift       # Feature normalization
+│   │   │   ├── ModelTrainer.swift           # On-device model updates
+│   │   │   └── ModelValidator.swift         # Prediction accuracy tracking
+│   │   ├── Presentation/
+│   │   │   ├── Dashboard/                   # Dashboard screen + components
+│   │   │   ├── History/                     # History & charts screen
+│   │   │   ├── Alerts/                      # Alerts management screen
+│   │   │   ├── Settings/                    # Settings screen
+│   │   │   ├── Location/                    # Location search
+│   │   │   ├── Onboarding/                  # First-launch onboarding
+│   │   │   └── Shared/                      # Shared components & styles
+│   │   └── Resources/
+│   │       ├── PrivacyInfo.xcprivacy        # App privacy manifest
+│   │       └── PEWS.xcdatamodeld/           # CoreData model
+│   └── PEWSTests/
+│       ├── Mocks/                           # Mock implementations
+│       └── UnitTests/                       # Unit test suites
+├── .swiftlint.yml                           # SwiftLint configuration
+├── .gitignore                               # Git ignore rules
+├── ARCHITECTURE.md                          # Architecture documentation
+├── CHANGELOG.md                             # Version history
+└── README.md                                # This file
 ```
 
 ---
@@ -130,16 +140,17 @@ PEWS/
 | Category | Technology |
 |----------|-----------|
 | **Language** | Swift 5.9 |
-| **UI Framework** | SwiftUI 4.0 |
+| **UI Framework** | SwiftUI 5.0 |
 | **Architecture** | Clean Architecture + MVVM |
 | **ML Framework** | CoreML |
 | **Networking** | URLSession (async/await) |
 | **Local Storage** | CoreData + UserDefaults |
-| **Caching** | NSCache + Disk Cache |
-| **Charts** | Swift Charts (iOS 16+) |
+| **Caching** | NSCache + Disk Cache (SHA256 keys) |
+| **Charts** | Swift Charts |
 | **Notifications** | UserNotifications |
 | **Background Tasks** | BGTaskScheduler |
-| **Minimum iOS** | iOS 16.0 |
+| **Concurrency** | Swift Concurrency (Sendable, actors) |
+| **Minimum iOS** | iOS 17.0 |
 
 ---
 
@@ -147,31 +158,44 @@ PEWS/
 
 ### Prerequisites
 
-- Xcode 15.0+
-- iOS 16.0+ deployment target
-- OpenWeatherMap API key
+- Xcode 15.0 or later
+- iOS 17.0+ deployment target
+- An [OpenWeatherMap](https://openweathermap.org/api) API key (free tier works)
 
 ### Setup
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/PEWS.git
+   gh repo clone ahmedahmedm31/PEWS
    cd PEWS
    ```
 
-2. **Configure API Keys**
+2. **Configure API keys** (choose one method)
+
+   **Option A — xcconfig (recommended for team workflows):**
    ```bash
-   cp App/Configuration/APIKeys.example.swift App/Configuration/APIKeys.swift
+   cp Configuration/Debug.xcconfig.example Configuration/Debug.xcconfig
    ```
-   Edit `APIKeys.swift` and add your OpenWeatherMap API key.
+   Open `Configuration/Debug.xcconfig` and replace `YOUR_API_KEY_HERE` with your real key. Then in Xcode, set the Debug configuration to reference this file and add `OPENWEATHERMAP_API_KEY = $(OPENWEATHERMAP_API_KEY)` to your `Info.plist`.
+
+   **Option B — direct file (quick start):**
+   ```bash
+   cp Sources/PEWS/App/Configuration/APIKeys.example.swift Sources/PEWS/App/Configuration/APIKeys.swift
+   ```
+   Open `APIKeys.swift` and replace the placeholder values with your real keys.
+
+   **Option C — environment variable (CI/testing):**
+   ```bash
+   export OPENWEATHERMAP_API_KEY="your_key_here"
+   ```
 
 3. **Open in Xcode**
-   ```bash
-   open PEWS.xcodeproj
-   ```
+
+   Open `Package.swift` in Xcode. It will automatically resolve the package structure and create a build scheme.
 
 4. **Build and Run**
-   Select your target device/simulator and press `Cmd + R`.
+
+   Select your target device or simulator and press `Cmd + R`.
 
 ### API Key
 
@@ -196,11 +220,11 @@ The app uses a dual-approach prediction system:
 
 | Feature | Range | Description |
 |---------|-------|-------------|
-| temperature | -40 to 50°C | Current temperature |
+| temperature | -40 to 50 C | Current temperature |
 | humidity | 0-100% | Relative humidity |
 | pressure | 950-1050 hPa | Atmospheric pressure |
 | windSpeed | 0-50 m/s | Wind speed |
-| windDirection | 0-360° | Wind direction |
+| windDirection | 0-360 deg | Wind direction |
 | cloudCoverage | 0-100% | Cloud cover percentage |
 | visibility | 0-20000m | Visibility distance |
 | precipitation | 0-50mm | Precipitation amount |
@@ -238,8 +262,11 @@ The app uses a dual-approach prediction system:
 ### Running Tests
 
 ```bash
-# Run all tests
-Cmd + U (in Xcode)
+# Run all tests in Xcode
+Cmd + U
+
+# Run via command line
+swift test
 
 # Run specific test suite
 swift test --filter FeatureExtractorTests

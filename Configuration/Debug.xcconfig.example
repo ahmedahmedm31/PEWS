@@ -1,0 +1,17 @@
+// Debug.xcconfig.example
+// PEWS - Predictive Early Warning System
+//
+// SETUP INSTRUCTIONS:
+// 1. Copy this file to Debug.xcconfig (in the same directory)
+// 2. Replace YOUR_API_KEY_HERE with your actual OpenWeatherMap API key
+// 3. Get a free API key at: https://openweathermap.org/api
+// 4. Debug.xcconfig is gitignored and will not be committed
+
+// OpenWeatherMap API Key
+OPENWEATHERMAP_API_KEY = YOUR_API_KEY_HERE
+
+// Bundle identifier
+PRODUCT_BUNDLE_IDENTIFIER = com.ahmedmagaji.PEWS
+
+// App display name
+PRODUCT_NAME = PEWS

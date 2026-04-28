@@ -30,7 +30,11 @@ Package.resolved
 Pods/
 
 # API Keys - NEVER COMMIT
-App/Configuration/APIKeys.swift
+Sources/PEWS/App/Configuration/APIKeys.swift
+
+# Build configuration with secrets - NEVER COMMIT
+Configuration/Debug.xcconfig
+Configuration/Release.xcconfig
 
 # OS Files
 .DS_Store
